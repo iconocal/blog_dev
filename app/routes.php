@@ -11,6 +11,8 @@
 |
 */
 
+Route::resource('posts', 'PostsController');
+
 Route::get('/', function()
 {
 	// return View::make('hello');
@@ -20,16 +22,6 @@ Route::get('/', function()
 Route::get('hi/{name}', 'HomeController@sayhello');
 
 
-// Route::get('say-hello/{urlName}', function($argName) {
-// $data = array(
-//     'viewName' => $argName,
-//     'age'      => 0
-//     );
-
-//     // Return View::make('sayhello')->with('viewName', $argName);
-//     return View::make('sayhello', $data);
-//     return View::make('sayhello')->($data);
-// });
 
 
 Route::get('say-hello/{name}/{age}', function($name, $age) {
