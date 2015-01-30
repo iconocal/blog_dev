@@ -17,18 +17,8 @@ Route::get('/', function()
     return 'Hello Codeup!';
 });
 
-Route::get('parks', function(){
-    return View::make('parks');
-});
+Route::get('hi/{name}', 'HomeController@sayhello');
 
-Route::post('parks', function() {
-    return 'Which will you see???';
-});
-
-
-
-
-/////////////////
 
 // Route::get('say-hello/{urlName}', function($argName) {
 // $data = array(
@@ -41,33 +31,51 @@ Route::post('parks', function() {
 //     return View::make('sayhello')->($data);
 // });
 
-///////////////////
 
+Route::get('say-hello/{name}/{age}', function($name, $age) {
+    return "Hello $name! I hear you're $age years old!";
+});
 
-// Route::get('say-hello/{name}/{age}', function($name, $age) {
-//     return "Hello $name! I hear you're $age years old!";
-// });
-
-// Route::get('resume', function() {
-//     return 'This is my resume.';
-// });
-
-// Route::get('portfolio', function() {
-//     return 'This is my portfolio.';
-// });
-
-
-// Create a route that responds to a GET request on the path /rolldice.
-// Within the route, return a random number between 1 and 6.
-// Add a view named roll-dice.php. Instead of just returning the random number, show the view and have it display the random number.
-// Modify the route to take in a parameter named guess. Someone will access the route by visiting http://blog.dev/rolldice/1, where 1 is their guess.
-// Modify the route and view so that you can display the guess in addition to the roll and also tell if the guess matches the roll.
 
 Route::get('roll-dice/{guess}', function($guess){
     $roll = rand(1, 6);
 
     return View::make('roll-dice')->with('roll', $roll)->with('guess', $guess);
 });
+
+
+Route::get('resume/{name?}', 'HomeController@showResume');
+
+Route::get('portfolio', 'HomeController@showPortfolio');
+
+Route::get('whackamole', 'HomeController@playGame');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
