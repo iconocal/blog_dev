@@ -27,9 +27,9 @@ class HomeController extends BaseController {
 		return View::make('hello')->with('name', $name);
 	}
 
-	public function showResume($name) 
+	public function showResume() 
 	{
-        return View::make('resume')->with('name', $name);
+        return View::make('resume');
 	}
 
 	public function showPortfolio() 
@@ -37,10 +37,17 @@ class HomeController extends BaseController {
 		return View::make('portfolio');
 	}
 
-	public function playGame()
+	public function showGame()
 	{
-		return view::make('whackamole');
+		return Redirect::to('http://whackamole.dev/index.html');
 	}
+
+	public function showTest() 
+	{
+        return View::make('test');
+	}
+
+
 
 
 

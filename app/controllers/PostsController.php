@@ -9,7 +9,9 @@ class PostsController extends \BaseController {
 	 */
 	public function index()
 	{
-		return "Navigating to http://blog.dev/posts should return an index of every blog post.";
+		
+		$posts = Post::all();
+		return View::make('posts.index')->with('posts', $posts);
 	}
 
 
@@ -18,9 +20,11 @@ class PostsController extends \BaseController {
 	 *
 	 * @return Response
 	 */
+
 	public function create()
 	{
-		return "Navigating to http://blog.dev/posts/create should return a form for creating a post.";
+		return View::make('posts.create');
+
 	}
 
 
@@ -31,7 +35,21 @@ class PostsController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$validator = Validator::make(Input::all(), Post::$rules);
+
+		if ($validator->fails()) {
+			return Redirect::back()->withInput()->withErrors($validator);
+		} else {
+
+		$newPost = new Post();
+
+    	$newPost->title = Input::get('title');
+    	$newPost->body  = Input::get('body');
+
+    	$newPost->save();
+
+    	return Redirect::action('PostsController@index');
+    	}
 	}
 
 
@@ -43,7 +61,8 @@ class PostsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		return "Navigating to http://blog.dev/posts/{post} should return an individual post.";
+		$post = Post::find($id);
+		return View::make('posts.show')->with('post', $post);
 	}
 
 

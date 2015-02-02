@@ -22,13 +22,6 @@ Route::get('/', function()
 Route::get('hi/{name}', 'HomeController@sayhello');
 
 
-
-
-Route::get('say-hello/{name}/{age}', function($name, $age) {
-    return "Hello $name! I hear you're $age years old!";
-});
-
-
 Route::get('roll-dice/{guess}', function($guess){
     $roll = rand(1, 6);
 
@@ -36,11 +29,28 @@ Route::get('roll-dice/{guess}', function($guess){
 });
 
 
-Route::get('resume/{name?}', 'HomeController@showResume');
+Route::get('resume', 'HomeController@showResume');
 
 Route::get('portfolio', 'HomeController@showPortfolio');
 
-Route::get('whackamole', 'HomeController@playGame');
+Route::get('whackamole', 'HomeController@showGame');
+
+Route::get('test', 'HomeController@showTest');
+
+
+Route::get('orm-test', function ()
+{
+    $post1 = new Post();
+    $post1->title = Input::get('title'); // Example of how to capture input
+    $post1->body  = Input::get('body');
+    $post1->save();
+
+    return Redirect::back()->withInput();
+});
+
+
+
+
 
 
 
