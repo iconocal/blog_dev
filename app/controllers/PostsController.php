@@ -10,7 +10,8 @@ class PostsController extends \BaseController {
 	public function index()
 	{
 		
-		$posts = Post::all();
+		// $posts = Post::all();
+		$posts = Post::paginate(4);
 		return View::make('posts.index')->with('posts', $posts);
 	}
 
@@ -74,7 +75,8 @@ class PostsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		return "Navigating to http://blog.dev/posts/{post}/edit should return a form for editing a specific post.";
+		$post = Post::findOrFail($id);
+		return View::make('posts.edit')->with('post', $post);
 	}
 
 
@@ -86,7 +88,21 @@ class PostsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$validator = Validator::make(Input::all(), Post::$rules);
+
+		if ($validator->fails()) {
+			return Redirect::back()->withInput()->withErrors($validator);
+		} else {
+
+		$post = Post::findOrFail($id);
+
+    	$post->title = Input::get('title');
+    	$post->body  = Input::get('body');
+
+    	$post->save();
+
+    	return Redirect::action('PostsController@index');
+    	}
 	}
 
 

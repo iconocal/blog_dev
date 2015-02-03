@@ -1,22 +1,17 @@
 @extends('layouts.master')
 
 @section('content')
-    <h1>Create A Post</h1>
+    
+    <div class="page-header"><h1>Create A Post</h1></div>
+    
 
-<form action="{{{ action('PostsController@store') }}}" method="POST">
-  <div class="form-group">
-    <label for="title">Title</label>
-    <input type="text" class="form-control" id="title" name="title" value="{{{ Input::old('title') }}}" placeholder="Enter Title">
-    {{ $errors->first('title', '<span class="help-block">:message</span>') }}
-  </div>
-  <div class="form-group">
-    <label for="body">Body</label>
-    <input type="text" class="form-control" id="body" name="body" value="{{{ Input::old('body') }}}" placeholder="Enter Body">
-    {{ $errors->first('body', '<p class="help-block">:message</p>') }}
-  </div>
 
-  <button type="submit" class="btn btn-default">Submit</button>
-</form>
+{{ Form::open(array('action' => 'PostsController@store')) }}
+  @include('posts.form')
+
+    {{ Form::submit('Create Post', array('class' => 'btn btn-primary')) }}
+
+{{ Form::close() }}
 
 
 
