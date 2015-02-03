@@ -11,16 +11,11 @@
 |
 */
 
+
+
 Route::resource('posts', 'PostsController');
 
-Route::get('/', function()
-{
-	// return View::make('hello');
-    return 'Hello Codeup!';
-});
-
-Route::get('hi/{name}', 'HomeController@sayhello');
-
+Route::get('/', 'PostsController@index');
 
 Route::get('roll-dice/{guess}', function($guess){
     $roll = rand(1, 6);

@@ -1,11 +1,15 @@
 @extends('layouts.master')
 
-@section('content')
-    <h1>All Posts</h1>
 
-    @foreach ($posts as $post)
-    <h3>{{{ $post->title }}}</h3>
-    <h4>{{{$post->body}}}</h4>
+@section('content')
+
+@foreach ($posts as $post)
+    <article>
+        <h2>{{{ $post->title }}}</h2>
+        <p>{{{$post->body}}}</p>
+        <p>Created: {{{$post->created_at->diffForHumans() }}}</p>
+        <a href="{{{action('PostsController@show', $post->id) }}}">Read More</a>
+    </article>
 @endforeach
 
 

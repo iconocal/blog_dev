@@ -11,7 +11,7 @@ class PostsController extends \BaseController {
 	{
 		
 		// $posts = Post::all();
-		$posts = Post::paginate(4);
+		$posts = Post::paginate(3);
 		return View::make('posts.index')->with('posts', $posts);
 	}
 
@@ -36,21 +36,11 @@ class PostsController extends \BaseController {
 	 */
 	public function store()
 	{
-		$validator = Validator::make(Input::all(), Post::$rules);
+		
+		$post = new Post();
+		return $this->savePost($post);
 
-		if ($validator->fails()) {
-			return Redirect::back()->withInput()->withErrors($validator);
-		} else {
 
-		$newPost = new Post();
-
-    	$newPost->title = Input::get('title');
-    	$newPost->body  = Input::get('body');
-
-    	$newPost->save();
-
-    	return Redirect::action('PostsController@index');
-    	}
 	}
 
 
@@ -62,8 +52,16 @@ class PostsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$post = Post::find($id);
+		try {
+			$post = Post::findOrFail($id);
+
+		} catch (Exception $e) {
+			Log::info("User tried to request this id: " . $id );
+			App::abort(404);
+		}
+
 		return View::make('posts.show')->with('post', $post);
+		
 	}
 
 
@@ -88,21 +86,8 @@ class PostsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		$validator = Validator::make(Input::all(), Post::$rules);
-
-		if ($validator->fails()) {
-			return Redirect::back()->withInput()->withErrors($validator);
-		} else {
-
 		$post = Post::findOrFail($id);
-
-    	$post->title = Input::get('title');
-    	$post->body  = Input::get('body');
-
-    	$post->save();
-
-    	return Redirect::action('PostsController@index');
-    	}
+		return $this->savePost($post);
 	}
 
 
@@ -115,6 +100,24 @@ class PostsController extends \BaseController {
 	public function destroy($id)
 	{
 		//
+	}
+
+	protected function savePost($post)
+	{
+		$validator = Validator::make(Input::all(), Post::$rules);
+
+		if ($validator->fails()) {
+			Session::flash('errorMessage', 'Failed to save your post!');
+			return Redirect::back()->withInput()->withErrors($validator);
+		} else {
+
+    	$post->title = Input::get('title');
+    	$post->body  = Input::get('body');
+
+    	$post->save();
+    	Session::flash('successMessage', 'Your post was saved!');
+    	return Redirect::action('PostsController@index');
+    	}
 	}
 
 

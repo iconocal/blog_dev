@@ -6,6 +6,8 @@
 
     <h3>{{{ $post->title }}}</h3>
     <h4>{{{$post->body}}}</h4>
+    <p>Created: {{{$post->created_at->diffForHumans() }}}</p>
+
 
 
 
