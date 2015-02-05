@@ -12,7 +12,8 @@
 <body>
 
 <div class="container">
-
+    
+    @include('navbar')
     @include('jumbo')
 
     @if (Session::has('successMessage'))

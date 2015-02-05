@@ -1,20 +1,60 @@
-<nav class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="#">Rocketdog</a>
-    </div>   
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+<!--       <a class="navbar-brand" href="#">Rocketdog!</a> -->
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-            <li class="active">
-                <a href="#">CV</a>
-            </li>
-            <li>
-                <a href="#">Portfolio</a>
-            </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a href="#">Contact</a>
-            </li>        
-        </ul>
-    </div>   
+      <ul class="nav navbar-nav"></ul>
+
+
+
+
+<!-- NAVBAR SEARCH -->
+
+      {{ Form::open(array('action' => 'PostsController@index', 'method' => 'GET')) }}
+
+      <div class="form-group">
+        {{ Form::text('search') }}
+      </div>
+
+      <div class="form-group">
+        {{ Form::submit('Search', array('class' => 'btn btn-primary')) }}
+      </div> 
+    {{ Form::close() }}
+<!-- END NAVBAR SEARCH -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
 </nav>

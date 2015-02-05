@@ -11,18 +11,9 @@
 |
 */
 
-
-
 Route::resource('posts', 'PostsController');
 
 Route::get('/', 'PostsController@index');
-
-Route::get('roll-dice/{guess}', function($guess){
-    $roll = rand(1, 6);
-
-    return View::make('roll-dice')->with('roll', $roll)->with('guess', $guess);
-});
-
 
 Route::get('resume', 'HomeController@showResume');
 
@@ -42,6 +33,12 @@ Route::get('orm-test', function ()
 
     return Redirect::back()->withInput();
 });
+
+Route::get('login', 'HomeController@showLogin');
+
+Route::post('login', 'HomeController@doLogin');
+
+Route::get('logout', 'HomeController@doLogout');
 
 
 

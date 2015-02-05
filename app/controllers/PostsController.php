@@ -2,6 +2,14 @@
 
 class PostsController extends \BaseController {
 
+	// Filter: Check for authorization
+	public function __construct()
+	{
+		parent::__construct();
+
+		$this->beforeFilter('auth', array('except' => array('index', 'show')));
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -9,9 +17,24 @@ class PostsController extends \BaseController {
 	 */
 	public function index()
 	{
-		
-		// $posts = Post::all();
-		$posts = Post::paginate(3);
+		$query = Post::with('user');
+
+		if (Input::has('search')) {
+
+			$search = Input::get('search');
+
+			$query->where('title', 'like', "%" . $search . "%");
+			$query->orWhere('body', 'like', "%" . $search . "%");
+
+			$query->orWhereHas('user', function($q) {
+        		$search = Input::get('search');
+        		$q->where('email', 'like', "%" . $search . "%");
+    		});
+
+		}
+
+		$posts = $query->orderBy('created_at', 'asc')->paginate(4);
+
 		return View::make('posts.index')->with('posts', $posts);
 	}
 
@@ -38,8 +61,8 @@ class PostsController extends \BaseController {
 	{
 		
 		$post = new Post();
+		$post->user_id = Auth::id();
 		return $this->savePost($post);
-
 
 	}
 
@@ -99,7 +122,19 @@ class PostsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		try {
+			$post = Post::findOrFail($id);
+
+		} catch (Exception $e) {
+			Log::info("User tried to request this id: " . $id );
+			App::abort(404);
+		}
+
+		$post->delete();
+
+		Session::flash('successMessage', 'Post Deleted!');
+
+		return Redirect::action('PostsController@index');
 	}
 
 	protected function savePost($post)
@@ -119,6 +154,8 @@ class PostsController extends \BaseController {
     	return Redirect::action('PostsController@index');
     	}
 	}
+
+
 
 
 }

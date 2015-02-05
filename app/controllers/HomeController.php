@@ -47,6 +47,38 @@ class HomeController extends BaseController {
         return View::make('test');
 	}
 
+	public function showLogin()
+	{
+		return View::make('login');
+	}
+
+	public function doLogin()
+	{
+		$email = Input::get('email');
+		$password = Input::get('password');
+
+		if (Auth::attempt(array('email' => $email, 'password' => $password))) {
+    		Session::flash('successMessage', 'Successfully logged in!');
+
+    		return Redirect::intended('/');
+		} else {
+    		Session::flash('errorMessage', 'Failed to log in!');
+
+    		return Redirect::action('HomeController@showLogin');
+
+		}
+	}
+
+	public function doLogout()
+	{
+		Auth::logout();
+
+		Session::flash('successMessage', 'Successfully logged out!');
+
+		return Redirect::action('PostsController@index');
+	}
+
+
 
 
 

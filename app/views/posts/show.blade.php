@@ -4,14 +4,28 @@
     <h1>New Post</h1>
 
 
-    <h3>{{{ $post->title }}}</h3>
-    <h4>{{{$post->body}}}</h4>
+    <h2>{{{ $post->title }}}</h3>
+    <h4>by {{{$post->user->email}}}</h5>
+    <p>{{{$post->body}}}</p>
     <p>Created: {{{$post->created_at->diffForHumans() }}}</p>
 
 
+    <div class="post-body">
+<!--         <p>{{{ $post->body }}}</p> -->
+        @if (Auth::check())
+<!--             {{{ Auth::id() }}} -->
+            <a href="{{{ action('PostsController@edit', $post->id) }}}" class="pull-right">Edit Post</a>
+        @endif
+
+        {{ Form::open(array('action' => array('PostsController@destroy', $post->id), 'method' => 'delete')) }}
+            {{ Form::submit('Delete Post', array('class' => 'btn btn-danger')) }}
+        {{ Form::close() }}
 
 
+    </div>
 
-
+<!--         @if (Auth::guest())
+            <h2>Welcome Guest!</h2>
+        @endif -->
 
 @stop
