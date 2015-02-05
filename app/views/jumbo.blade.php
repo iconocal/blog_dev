@@ -1,5 +1,5 @@
 <div class="jumbotron">
     <h1>
-        Rocketdog Blog!
+        Rocketdog Blog
     </h1>    
 </div>

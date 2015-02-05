@@ -14,18 +14,15 @@
 <!--         <p>{{{ $post->body }}}</p> -->
         @if (Auth::check())
 <!--             {{{ Auth::id() }}} -->
-            <a href="{{{ action('PostsController@edit', $post->id) }}}" class="pull-right">Edit Post</a>
+            <a href="{{{ action('PostsController@edit', $post->id) }}}" class="btn btn-primary pull-right">Edit Post</a>
         @endif
 
+        @if (Auth::check())
         {{ Form::open(array('action' => array('PostsController@destroy', $post->id), 'method' => 'delete')) }}
             {{ Form::submit('Delete Post', array('class' => 'btn btn-danger')) }}
         {{ Form::close() }}
-
+        @endif
 
     </div>
-
-<!--         @if (Auth::guest())
-            <h2>Welcome Guest!</h2>
-        @endif -->
 
 @stop

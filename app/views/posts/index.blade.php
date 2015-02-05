@@ -3,6 +3,10 @@
 
 @section('content')
 
+@if (Auth::check())
+    <a href="{{{ action('PostsController@create') }}}" class="btn btn-primary">New Post</a>
+@endif
+
 @foreach ($posts as $post)
     <article>
         <h2>{{{ $post->title }}}</h2>
