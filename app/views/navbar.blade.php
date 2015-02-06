@@ -16,7 +16,9 @@
             <ul class="nav navbar-nav"></ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="https://www.linkedin.com/in/calvinglover"><i class="fa fa-linkedin-square fa-2x"></i></a></li>
-                <li><a href="https://twitter.com/cgin09"><i class="fa fa-twitter fa-2x"></i></a></li>        
+                <li><a href="https://twitter.com/cgin09"><i class="fa fa-twitter fa-2x"></i></a></li> 
+<!--                 <li><a href="cglover.depuy@me.com"></a><i class="fa fa-envelope fa-2x"></i></li> -->
+                     
 
             <!-- NAVBAR SEARCH -->
                 {{ Form::open(array('action' => 'PostsController@index', 'method' => 'GET', 'class' => 'navbar-form navbar-left')) }}

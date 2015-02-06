@@ -6,8 +6,6 @@ class PostTableSeeder extends Seeder
     {
         $user = User::first();
 
-        for ($i = 1)
-
         $user = new User();
         $user->email = $_ENV['DEFAULT_USER_EMAIL'];
         $user->password = $_ENV['DEFAULT_USER_PASSWORD'];
