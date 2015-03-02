@@ -1,7 +1,3 @@
-
-
-
-
 <div class="form-group">
     {{ Form::label('title', 'Post Title') }}
     {{ Form::text('title', Input::old('title'), array('class' => "form-control")) }}

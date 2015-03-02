@@ -3,6 +3,7 @@
 
 @section('content')
 
+<div class="container">
 @if (Auth::check())
     <a href="{{{ action('PostsController@create') }}}" class="btn btn-primary">New Post</a>
 @endif
@@ -21,6 +22,8 @@
 <div>
 
 {{ $posts->appends(array('search' => Input::get('search')))->links() }}
+
+</div>
 
 </div>
 
