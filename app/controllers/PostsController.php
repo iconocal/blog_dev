@@ -33,7 +33,7 @@ class PostsController extends \BaseController {
 
 		}
 
-		$posts = $query->orderBy('created_at', 'asc')->paginate(4);
+		$posts = $query->orderBy('created_at', 'desc')->paginate(4);
 
 		return View::make('posts.index')->with('posts', $posts);
 	}
