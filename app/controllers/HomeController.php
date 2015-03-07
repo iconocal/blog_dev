@@ -20,12 +20,6 @@ class HomeController extends BaseController {
 		return View::make('hello');
 	}
 
-	public function sayHello($name)
-	{
-		// code here
-		// logic here
-		return View::make('hello')->with('name', $name);
-	}
 
 	public function showResume() 
 	{
@@ -42,9 +36,9 @@ class HomeController extends BaseController {
 		return Redirect::to('http://whackamole.dev/index.html');
 	}
 
-	public function showTest() 
+	public function showSumdigits()
 	{
-        return View::make('test');
+		return View::make('sumdigits');
 	}
 
 	public function showLogin()

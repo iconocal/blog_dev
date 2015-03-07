@@ -1,5 +1,6 @@
 @extends('layouts.master')
 
+@include('partials.jumbo')
 
 @section('content')
 

@@ -21,13 +21,13 @@ Route::get('portfolio', 'HomeController@showPortfolio');
 
 Route::get('whackamole', 'HomeController@showGame');
 
-Route::get('test', 'HomeController@showTest');
+Route::get('sumdigits', 'HomeController@showSumdigits');
 
 
 Route::get('orm-test', function ()
 {
     $post1 = new Post();
-    $post1->title = Input::get('title'); // Example of how to capture input
+    $post1->title = Input::get('title');
     $post1->body  = Input::get('body');
     $post1->save();
 

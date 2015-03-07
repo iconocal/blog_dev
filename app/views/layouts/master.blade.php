@@ -21,8 +21,8 @@
 
 {{-- <div class="container"> --}}
     
-    @include('navbar')
-    @include('jumbo')
+    @include('partials.navbar')
+{{--     @include('jumbo') --}}
 
     @if (Session::has('successMessage'))
     <div class="alert alert-success">{{{ Session::get('successMessage') }}}</div>
