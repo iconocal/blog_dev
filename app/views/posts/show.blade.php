@@ -5,7 +5,7 @@
 
 @section('content')
 
-
+<div class="container">
     <h2>{{{ $post->title }}}</h3>
     <h4>by {{{$post->user->email}}}</h5>
     <p>{{{$post->body}}}</p>
@@ -26,5 +26,7 @@
         @endif
 
     </div>
+
+</div>
 
 @stop
