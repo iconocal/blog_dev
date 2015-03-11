@@ -22,6 +22,7 @@ Route::get('portfolio', 'HomeController@showPortfolio');
 Route::get('whackamole', 'HomeController@showGame');
 
 Route::get('sumdigits', 'HomeController@showSumdigits');
+Route::post('sumdigits', 'HomeController@showSumdigits');
 
 
 Route::get('orm-test', function ()

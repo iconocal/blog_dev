@@ -1,8 +1,6 @@
 
 <?php
 
-$sum = 0;
-
 function sumDigits($num) {
      if (is_numeric($num)) {
          $sum = array_sum(str_split($num));
@@ -10,35 +8,42 @@ function sumDigits($num) {
      } 
 }
 
-if(isset($_POST['integer'])) {
-        $sum = sumDigits($_POST['integer']);
-    }
+$number = Request::input('integer');
+
+$sum = sumDigits($number);
 
 ?>
 
 
 @extends('layouts.master')
 
+@include('partials.navbar')
+
 @section('content')
 
 <div class="container">
-<h1>Sum Digits!</h1>
 
 
+<br><br>
 
-{{ Form::open(array('url' => '/sumdigits')) }}
+<h1>Sum 'Dem Digits!</h1>
+
+<div>
+
+{{ Form::open() }}
     <div class="form-group">
-        {{ Form::label('integer', 'Enter an integer') }}
+        {{ Form::label('integer', 'Enter an integer to sum') }}
         {{ Form::number('integer', Input::old('integer'), array('class' => "form-control")) }}
-{{--         {{ $errors->first('integer', '<span class="help-block">:message</span>') }} --}}
     </div>
 
-    {{ Form::submit('Submit', array('class' => 'btn btn-primary')) }}
+    {{ Form::submit('Go Time!', array('class' => 'btn btn-primary')) }}
 
 {{ Form::close() }}
 
+</div>
 
-<p>The sum is {{{$sum}}}.</p>
+
+<p>The sum of {{{$number}}} is {{{$sum}}}.</p>
 
 
 

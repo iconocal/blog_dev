@@ -21,7 +21,7 @@
 
 {{-- <div class="container"> --}}
     
-    @include('partials.navbar')
+    
 {{--     @include('jumbo') --}}
 
     @if (Session::has('successMessage'))
